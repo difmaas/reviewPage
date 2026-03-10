@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin - Daftar Review</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: #f0f4f8;
+        padding: 2rem;
+      }
+      h2 {
+        margin-bottom: 1.5rem;
+        color: #1e293b;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      }
+      th {
+        background: #157733;
+        color: #fff;
+        padding: 0.75rem 1rem;
+        text-align: left;
+        font-size: 0.85rem;
+      }
+      td {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid #e2e8f0;
+        font-size: 0.9rem;
+        color: #334155;
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+      tr:hover td {
+        background: #f8fafc;
+      }
+
+      .empty {
+        text-align: center;
+        padding: 2rem;
+        color: #94a3b8;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Daftar Ulasanpip ({{ reviews | length }})</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nama</th>
+          <th>Rating</th>
+          <th>Pesan</th>
+          <th>Tanggal</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if reviews %} {% for review in reviews %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ review.nama }}</td>
+          <td>
+            {{ '★' * (review.rating or 0) }}{{ '☆' * (5 - (review.rating or 0))
+            }}
+          </td>
+
+          <td>{{ review.ulasan }}</td>
+          <td>{{ review.created_at.strftime('%d %b %Y, %H:%M') }}</td>
+        </tr>
+        {% endfor %} {% else %}
+        <tr>
+          <td colspan="5" class="empty">Belum ada review masuk.</td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </body>
+</html>
