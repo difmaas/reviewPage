@@ -1,17 +1,11 @@
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request,flash,redirect,url_for
 from models import db,Review
 import os
 
 app = Flask(__name__)
+app.secret_key = "rahasia"
 basedir = os.path.abspath(os.path.dirname(__file__))
-
-database_url = os.environ.get("DATABASE_URL", "sqlite:///" + os.path.join(basedir, "review.db"))
-
-# Fix untuk Render (postgres:// → postgresql://)
-if database_url.startswith("postgres://"):
-    database_url = database_url.replace("postgres://", "postgresql://", 1)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = database_url
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///review.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
@@ -19,18 +13,20 @@ db.init_app(app)
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
+    
         nama   = request.form.get("nama")
         rating = request.form.get("rating")
         ulasan = request.form.get("ulasan")
         if not rating:
-            return render_template("index.html", form=request.form, error="Pilih rating terlebih dahulu.")
+            return render_template("index.html", form=request.form, error="Belum ada ulasan.")
         review_baru = Review(nama=nama, rating=rating, ulasan=ulasan)
         db.session.add(review_baru)
         db.session.commit()
 
-        return render_template("index.html", form={}, success=True)
-
-    return render_template("index.html", form={})  # ← pastikan form={} ada di sini
+        flash("Ulasan berhasil dikirim!", "success")
+        return redirect(url_for("index"))  
+    
+    return render_template("index.html", form={}, success=False)
 
 @app.route('/admin/')
 def admin():

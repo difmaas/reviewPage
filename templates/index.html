@@ -1,167 +1,199 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Form Ulasan</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Ulasan</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    body {
-      min-height: 100vh;
-      background: #f0f4f8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Segoe UI', sans-serif;
-      padding: 2rem 1rem;
-    }
+      body {
+        min-height: 100vh;
+        background: #f0f4f8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Segoe UI", sans-serif;
+        padding: 2rem 1rem;
+      }
 
-    .card {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-      padding: 2rem;
-      width: 100%;
-      max-width: 460px;
-    }
+      .card {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+        padding: 2rem;
+        width: 100%;
+        max-width: 460px;
+      }
 
-    h2 {
-      font-size: 1.4rem;
-      color: #1e293b;
-      margin-bottom: 1.5rem;
-      text-align: center;
-      margin-bottom: 10%;
-    }
+      h2 {
+        font-size: 1.4rem;
+        color: #1e293b;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        margin-bottom: 10%;
+      }
 
-    .field {
-      margin-bottom: 1.2rem;
-    }
+      .field {
+        margin-bottom: 1.2rem;
+      }
 
-    label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #475569;
-      margin-bottom: 0.4rem;
-    }
+      label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #475569;
+        margin-bottom: 0.4rem;
+      }
 
-    input,textarea {
-      
-      width: 100%;
-      padding: 0.6rem 0.85rem;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      color: #1e293b;
-      outline: none;
-      transition: border-color 0.2s;
-    }
+      input,
+      textarea {
+        width: 100%;
+        padding: 0.6rem 0.85rem;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        color: #1e293b;
+        outline: none;
+        transition: border-color 0.2s;
+      }
 
-    input[type="text"]:focus,
-    textarea:focus {
-      border-color: #6366f1;
-    }
+      input[type="text"]:focus,
+      textarea:focus {
+        border-color: #6366f1;
+      }
 
-    textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
+      textarea {
+        min-height: 100px;
+        resize: vertical;
+      }
 
-    /* Star Rating */
-    .stars {
-      display: flex;
-      flex-direction: row-reverse;
-      justify-content: flex-end;
-      gap: 4px;
-    }
+      /* Star Rating */
+      .stars {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        gap: 4px;
+      }
 
-    .stars input { display: none; }
+      .stars input {
+        display: none;
+      }
 
-    .stars label {
-      font-size: 1.8rem;
-      color: #cbd5e1;
-      cursor: pointer;
-      margin: 0;
-      font-weight: normal;
-      transition: color 0.15s;
-    }
+      .stars label {
+        font-size: 1.8rem;
+        color: #cbd5e1;
+        cursor: pointer;
+        margin: 0;
+        font-weight: normal;
+        transition: color 0.15s;
+      }
 
-    .stars label:hover,
-    .stars label:hover ~ label,
-    .stars input:checked ~ label {
-      color: #fda000;
-    }
+      .stars label:hover,
+      .stars label:hover ~ label,
+      .stars input:checked ~ label {
+        color: #fda000;
+      }
 
-    button {
-      width: 100%;
-      padding: 0.75rem;
-      background: #157733;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 0.5rem;
-      transition: background 0.2s;
-    }
+      button {
+        width: 100%;
+        padding: 0.75rem;
+        background: #157733;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 0.5rem;
+        transition: background 0.2s;
+      }
 
-    button:hover { background: #20551b; }
-  </style>
-</head>
-<body>
+      button:hover {
+        background: #20551b;
+      }
+      .alert {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
 
-<div class="card">
-  <h2>Share Pengalaman Belajar Kamu Selama di UNDS</h2>
+.alert.success { background: #dcfce7; color: #166534; }
+.alert.error   { background: #fee2e2; color: #991b1b; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h2>Share Pengalaman Belajar Kamu Selama di UNDS</h2>
+     
+      <form method="POST" action="/">
+        <!-- Nama -->
+        <div class="field">
+          <label for="nama">Nama</label>
+          <input
+            type="text"
+            id="nama"
+            name="nama"
+            placeholder="Masukkan nama kamu"
+            value="{{ form.nama | default('') }}"
+            required
+          />
+        </div>
 
-  <form method="POST" action="/">
+        <!-- Rating -->
+        <div class="field">
+          <label>Rating</label>
+          <div class="stars">
+            {% for i in range(5, 0, -1) %}
+<input
+  type="radio"
+  id="star{{ i }}"
+  name="rating"
+  value="{{ i }}"
+  {% if form.rating | default(0) | int == i %}checked{% endif %}
+/>
+<label for="star{{ i }}" title="{{ i }} bintang">★</label>
+{% endfor %}
+          </div>
+        </div>
 
-    <!-- Nama -->
-    <div class="field">
-      <label for="nama">Nama</label>
-      <input
-        type="text"
-        id="nama"
-        name="nama"
-        placeholder="Masukkan nama kamu"
-        value="{{ form.nama | default('') }}"
-        required
-      />
+        <!-- Ulasan -->
+        <div class="field">
+          <label for="ulasan">Ulasan</label>
+          <textarea
+            id="ulasan"
+            name="ulasan"
+            placeholder="Ceritakan pengalaman belajar kamu!"
+            required
+          >
+{{ form.ulasan | default('') }}</textarea
+          >
+        </div>
+
+        <button type="submit">Kirim Ulasan</button>
+      </form>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+      <div id='alert-box' class="alert {{ category }}">✅ {{ message }}</div>
+      {% endfor %}
+      {% endwith %}
+      <script>
+        setTimeout(function() {
+          const alert = document.getElementById("alert-box");
+          if (alert) {
+            alert.style.transition = "opacity 0.5s";
+            alert.style.opacity = "0";
+            setTimeout(() => alert.remove(), 500);
+          }
+        }, 1000); // 3000ms = 3 detik
+      </script>
     </div>
-
-    <!-- Rating -->
-    <div class="field">
-      <label>Rating</label>
-      <div class="stars">
-        {% for i in range(5, 0, -1) %}
-        <input
-          type="radio"
-          id="star{{ i }}"
-          name="rating"
-          value="{{ i }}"
-          {% if form.rating | default(0) | int == i %}checked{% endif %}
-        />
-        <label for="star{{ i }}" title="{{ i }} bintang">★</label>
-        {% endfor %}
-      </div>
-    </div>
-
-    <!-- Ulasan -->
-    <div class="field">
-      <label for="ulasan">Ulasan</label>
-      <textarea
-        id="ulasan"
-        name="ulasan"
-        placeholder="Ceritakan pengalaman belajar kamu!"
-        required
-      >{{ form.ulasan | default('') }}</textarea>
-    </div>
-
-    <button type="submit">Kirim Ulasan</button>
-
-  </form>
-</div>
-
 </body>
+
 </html>
